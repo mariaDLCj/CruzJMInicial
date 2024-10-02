@@ -44,3 +44,9 @@ Enlace que lleva al formulario, en caso de estar los campos vacíos nos avisa de
 Se muestra un formulario con un botón para Enumeration y otro para Map, se valida en el controlador la opción seleccionada y se
 maneja la información en función del botón.
 
+- Formulario que recuerda datos
+
+Se trata de enseñar el formulario en el get mediante el SpringBuilder, este formulario se envia por post al mismo controlador con el valor "primera" en el submit, que recibirá el doPost en el que validamos si el submit tiene el valor de "primera" en cuyo caso valida que todos
+los campos estén escritos, en caso contrario muestra un formulario oculto, y el botón enviar con otro valor diferente para que entre por el else 
+que valida si el valor es primera, de esta manera volvemos  amostrar el formulario.
+
