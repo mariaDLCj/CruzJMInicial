@@ -50,3 +50,5 @@ Se trata de enseñar el formulario en el get mediante el SpringBuilder, este for
 los campos estén escritos, en caso contrario muestra un formulario oculto, y el botón enviar con otro valor diferente para que entre por el else 
 que valida si el valor es primera, de esta manera volvemos  amostrar el formulario.
 
+
+

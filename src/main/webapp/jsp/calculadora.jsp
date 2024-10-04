@@ -35,17 +35,16 @@
                 } else {
         %>
         <p>Se está intentando dividir entre 0</p>
-        <%!
-                    return -1;
+        <%!   return -1;
                 }
             }
             //puedes mandar por texto el mesnaje de error con 
 %>
 <%
-            if (request.getParameter("switch") == null) {
+            if (request.getParameter("enviar") == null) {
         %>
         <form method="post" action="calculadora.jsp" >
-            <input type="hidden" name="switch" value="true">
+            <input type="submit" name="enviar" value="true">
             <table>
                 <tr>
                     <td>Primer número:</td>
