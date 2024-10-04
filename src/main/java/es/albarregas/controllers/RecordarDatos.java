@@ -8,13 +8,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Map;
-import static javax.management.Query.value;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -73,7 +70,7 @@ public class RecordarDatos extends HttpServlet {
                     + "<input type=\"date\" name=\"fecha_Nacimiento\"><br>\n"
                     + "<label>Domicilio</label>\n"
                     + "<input type=\"text\" name=\"domicilio\"><br>\n"
-                    + "<input type=\"submit\" name=\"primerSubmit\" value=\"primera\">\n"
+                    + "<input type=\"submit\" name=\"primera\" value=\"Enviar\">\n"
                     + "</form>");
 
             out.println("</head>");
@@ -109,159 +106,82 @@ public class RecordarDatos extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet RecordarDatos at " + request.getContextPath() + "</h1>");
 
-            /* INTENTO CON MAP*/
+            /* INTENTO CON ENUMERATION  */
+            //PODRÍA SER QUE TUVIERAS QUE LIMPIAR PARAMETROS SI USAS EL ENUMERATION AQUI ARRIBA DE TODO
             boolean vacios = false;
 
-            Map<String, String[]> parametros = request.getParameterMap();
-            String primerSubmit = request.getParameter("primerSubmit"); // te dice el valor del submit del GET
-            if (primerSubmit != null && primerSubmit.equals("primera")) {
+            if (request.getParameter("primera") == null) {
+                Enumeration<String> parametros = request.getParameterNames();
+                //COMPRUEBA QUE NO ESTÉ VACÍO
+                if (parametros.hasMoreElements()) {
+                    while (parametros.hasMoreElements()) {
+                        String nombreParametro = parametros.nextElement(); // Obtener el siguiente nombre de parámetro
+                        // String valorParametro = request.getParameter(nombreParametro);
+                        // si hay algún parámetro vacío
+                        if (nombreParametro == null || nombreParametro.isEmpty()) { // probar sino con isEmpty o con .equals("")
+                            vacios = true;
+                        }
+                    }
+                }
+                // SI NO ESTÁ VACÍO MUESTRA LOS DATOS
+                if (vacios == false) {
+                    //MOSTRAREMOS LOS DATOS CON MAP
+                    Map<String, String[]> parametrosMapa = request.getParameterMap();
+                    StringBuilder respuestaFormulario = new StringBuilder();
+                    //CON MAP MOSTRAREMOS LAS RESPUESTAS POR CLAVE Y VALOR
+                    for (Map.Entry<String, String[]> p : parametrosMapa.entrySet()) {
+                        String clave = p.getKey();
+                        String valor[] = p.getValue();
+                        respuestaFormulario.append("\n<p>").append(clave).append(" ").append(valor[0]).append("</p>\n");
+                    }
+                    out.println(respuestaFormulario.toString());
+                } else {// SI ESTÁN VACÍOS AVISAMOS Y PASAMOS EL FORMULARIO EN OCULTP
+                    StringBuilder aviso = new StringBuilder();
+                    aviso.append("<p>Todos los campos del formulario son obligatorios</p>").append("<form action=\"RecordarDatos\" method=\"post\">\n");
+
+                    if (parametros.hasMoreElements()) {
+                        while (parametros.hasMoreElements()) {
+                            String nombreParametro = null; // limpiando; 
+                            nombreParametro = parametros.nextElement();
+                            String parametro = request.getParameter(nombreParametro);
+
+                            // Obtener el siguiente nombre de parámetro
+                            aviso.append("<label>").append(nombreParametro).append("</label>")
+                                    .append("<input type=\"hidden\" name=\"").append(nombreParametro).append("\" value=\"").append(parametro).append("\"><br>\n");
+                        }// fin while
+                        aviso.append("<input type=\"submit\" name=\"segunda\" value=\"Continuar\">\n").append("</form>");
+                        out.println(aviso.toString());
+                    }
+                }
+            } else {// SI NO ES PRIMERA mostramos el fomulario de nuevo
+                Enumeration<String> parametros = request.getParameterNames();
                 StringBuilder formulario = new StringBuilder();
-                // String nombre = request.getParameter();
+                formulario.append("<form action=\"RecordarDatos\" method=\"post\">\n");
 
-                for (Map.Entry<String, String[]> p : parametros.entrySet()) {
-                    String clave = p.getKey();
-                    String valor[] = p.getValue();
-
-                    // PRIMERO COMPROBAR QUE LOS CAMPOS NO ESTÉN VACÍOS
-                    if (valor[0].isEmpty()) {
-                        vacios = true;
-                    }
-                }// cierre for de comprobacion vacio
-
-                formulario.append(" <form action=\"RecordarDatos\" method=\"post\">\n");
-
-                for (Map.Entry<String, String[]> p : parametros.entrySet()) {
-                    String clave = p.getKey();
-                    String valor[] = p.getValue();
-                    String nombre = request.getParameter(clave);
-
-                    // MOSTRAMOS LOS CAMPOS PORQUE NO ESTÁN VACÍOS
-                    if (!vacios) {
-                        out.println("<p>" + clave + valor[0] + "</p>");
-                    } else { //EN CASO DE QUE SÍ SEAN VACÍOS
-                        out.println("<p>Los campos deben estar rellenos</p>");
-
-                        // ESTE FORMULARIO DEBE IR OCULTO Y CON EL SUBMIT VALUE != PRIMERA
-                        // PARA QUE SE IMPRIMA PASANDO POR EL ELSE
-                        out.println("<p>ESTE ES EL FORMULARIO SEGUNDO</p>");
-
-                        formulario.append("<label>nombre</label>\n"
-                                + "<input type=\"hidden\" name=\"clave\" value=\"request.getParameter(clave)\"><br>\n");
-                        out.println(formulario.toString());
-                    } //cierre else campos vacíos
-                }// cierre for de muestra de parámetros
-                formulario.append("<input type=\"submit\" name=\"Continuar\" value=\"segunda\">\n"
-                        + "</form>");
-
-                out.println(formulario.toString());
-
-            } else { // si el valor del submit no es primera y es segunda muestra el formulario
-                out.println("<p>Los campos deben estar rellenos</p>");
-
-                for (Map.Entry<String, String[]> p : parametros.entrySet()) {
-                    String clave = p.getKey();
-                    String valor[] = p.getValue();
-
-                    out.println("<p>ESTE ES EL FORMULARIO QUE SE MUESTRA SI NO ESTA RELLENO</p>");
-                    StringBuilder formulario = new StringBuilder();
-
-                    formulario.append(" <form action=\"RecordarDatos\" method=\"post\">\n"
-                            + "<label>Nombre:</label>\n"
-                            + "<input type=\"text\" name=\"nombre\" value=\"request.getParameter(clave)\"><br>\n"
-                            + "<label>Apellidos</label>\n"
-                            + "<input type=\"text\" name=\"apellidos\" value=\"request.getParameter(clave)\"><br>\n"
-                            + "<label>Fecha Nacimiento</label>\n"
-                            + "<input type=\"date\" name=\"fecha_Nacimiento\" value=\"request.getParameter(clave)\"><br>\n"
-                            + "<label>Domicilio</label>\n"
-                            + "<input type=\"text\" name=\"domicilio\" value=\"request.getParameter(clave)\"><br>\n"
-                            + "<input type=\"submit\" name=\"Continuar\" value=\"primera\">\n"
-                            + "</form>");
-
-                    out.println(formulario.toString());
-
-                }
-
-                // ESTE FORMULARIO DEBE IR OCULTO Y CON EL SUBMIT VALUE != PRIMERA
-                // PARA QUE SE IMPRIMA PASANDO POR EL ELSE
-            }
-
-            /*
-            INTENTO CON ENUMERATION
-             String primerSubmit = request.getParameter("primerSubmit");
-            Enumeration<String> parametros = request.getParameterNames();
-
-            boolean vacios = false;
-            if (parametros.hasMoreElements()) {
-
-                while (parametros.hasMoreElements()) {
-                    String nombreParametro = parametros.nextElement(); // Obtener el siguiente nombre de parámetro
-                    String valorParametro = request.getParameter(nombreParametro);
-                    
-                    if (valorParametro.isEmpty()) {
-                        vacios = true;
-                    }
-                }
-
-                while (parametros.hasMoreElements()) {
-                    String nombreParametro = parametros.nextElement(); // Obtener el siguiente nombre de parámetro
-                    String valorParametro = request.getParameter(nombreParametro);
-
-                    //COMPROBAMOS QUE EL VALOR DEL FORMULARIO SEA PRIMERA 
-                    if (primerSubmit != null && primerSubmit.equals("primera")) {
-
-                        if (vacios == false) {
-                            out.println("<p>El " + nombreParametro + " es " + valorParametro + "</p>");
+                if (parametros.hasMoreElements()) {
+                    while (parametros.hasMoreElements()) {
+                        String nombreParametro = parametros.nextElement(); // Obtener el siguiente nombre de parámetro
+                        //EN CASO DE QUE SEA FECHA EL TIPO ES DATE SINO ES TEXT
+                        if (nombreParametro.equals("fecha_Nacimiento")) {
+                            formulario.append("<label>").append(nombreParametro).append("</label>")
+                                    .append("<input type=\"date\" name=\"").append(request.getParameter(nombreParametro)).append("\"><br>\n");
                         } else {
-                            out.println("<p>Has de rellenar todos los campos</p>");
+                            formulario.append("<label>").append(nombreParametro).append("</label>")
+                                    .append("<input type=\"text\" name=\"").append(request.getParameter(nombreParametro)).append("\"><br>\n");
+                        }
+                    }// fin while
+                    formulario.append("<input type=\"submit\" name=\"primera\" value=\"Enviar\">\n").append("</form>");
+                    out.println(formulario.toString());
+                }// fin if de parametroshasmore
 
-                            StringBuilder formulario = new StringBuilder();
-                            // ESTE FORMULARIO DEBE IR OCULTO Y CON EL SUBMIT VALUE != PRIMERA
-                            // PARA QUE SE IMPRIMA PASANDO POR EL ELSE
-                            out.println("<p>ESTE ES EL FORMULARIO SEGUNDO</p>");
-
-                            formulario.append(" <form action=\"RecordarDatos\" method=\"post\">\n"
-                                    + "<label>Nombre:</label>\n"
-                                    + "<input type=\"text\" name=\"nombre\" value=\"valorParametro\"><br>\n"
-                                    + "<label>Apellidos</label>\n"
-                                    + "<input type=\"text\" name=\"apellidos\" value=\"valorParametro\"><br>\n"
-                                    + "<label>Fecha Nacimiento</label>\n"
-                                    + "<input type=\"date\" name=\"fecha_Nacimiento\" value=\"valorParametro\"><br>\n"
-                                    + "<label>Domicilio</label>\n"
-                                    + "<input type=\"text\" name=\"domicilio\" value=\"valorParametro\"><br>\n"
-                                    + "<input type=\"submit\" name=\"primerSubmit\" value=\"segundo\">\n"
-                                    + "</form>");
-                            out.println(formulario.toString());
-
-                        }//fin comprobacion si esta vacio formulario primera
-
-                    } else {
-                        // ESTE FORMULARIO QUE SE MUESTRA Y VALUE == PRIMERA
-                        // PARA QUE SE IMPRIMA PASANDO POR EL ELSE
-                        StringBuilder formulario = new StringBuilder();
-                        out.println("<p>ESTE ES EL FORMULARIO PRIMERA DEL POST</p>");
-
-                        formulario.append(" <form action=\"RecordarDatos\" method=\"post\">\n"
-                                + "<label>Nombre:</label>\n"
-                                + "<input type=\"text\" name=\"nombre\" value=\"valorParametro\"><br>\n"
-                                + "<label>Apellidos</label>\n"
-                                + "<input type=\"text\" name=\"apellidos\" value=\"valorParametro\"><br>\n"
-                                + "<label>Fecha Nacimiento</label>\n"
-                                + "<input type=\"date\" name=\"fecha_Nacimiento\" value=\"valorParametro\"><br>\n"
-                                + "<label>Domicilio</label>\n"
-                                + "<input type=\"text\" name=\"domicilio\" value=\"valorParametro\"><br>\n"
-                                + "<input type=\"submit\" name=\"primerSubmit\" value=\"primera\">\n"
-                                + "</form>");
-                        out.println(formulario.toString());
-                    }
-
-                }
-            }// final if parametros hasmoreElements
-             */
+            }// fin del if else inicial
             out.println("</body>");
             out.println("</html>");
-        }
+        }//fin try
+    }//fin post
+    
+    
 
-    }
 
     /**
      * Returns a short description of the servlet.

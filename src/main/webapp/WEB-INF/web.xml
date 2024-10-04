@@ -32,6 +32,14 @@
         <servlet-name>RecordarDatos</servlet-name>
         <servlet-class>es.albarregas.controllers.RecordarDatos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CicloVidaServletNuevo</servlet-name>
+        <servlet-class>es.albarregas.controllers.CicloVidaServletNuevo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CicloVidaServlet</servlet-name>
+        <servlet-class>es.albarregas.controllers.CicloVidaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DatosForm</servlet-name>
         <url-pattern>/DatosForm</url-pattern>
@@ -63,6 +71,14 @@
     <servlet-mapping>
         <servlet-name>RecordarDatos</servlet-name>
         <url-pattern>/RecordarDatos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CicloVidaServletNuevo</servlet-name>
+        <url-pattern>/CicloVidaServletNuevo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CicloVidaServlet</servlet-name>
+        <url-pattern>/CicloVidaServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
