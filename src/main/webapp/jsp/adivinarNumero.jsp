@@ -55,19 +55,19 @@
                     numerosJugados.append(numeroJugador).append("<br>"); // Agregar número jugado a la lista
                     // COMPROBAMOS QUE EL NÚMERO ES DEL RANGO ELEGIDO
                     if (numeroJugador > 100 || numeroJugador < 1) {
-                        mensaje.append("Introduce un n&uacute;mero del 1 al 100, por favor.");
+                        mensaje.append("Introduce un número del 1 al 100, por favor.");
                     } else {
                         if (numeroJugador == numeroSecreto) {
                             mensaje.append("Intento ").append(intentos).append(": Acertado ");
                             conseguido = true;
                         } else if (numeroJugador < numeroSecreto) {
-                            mensaje.append("Intento ").append(intentos).append(": ").append(numeroJugador).append(" el n&uacute;mero secreto es mayor<br>");
+                            mensaje.append(" el número secreto es mayor<br>");
                         } else {
-                            mensaje.append("Intento ").append(intentos).append(": ").append(numeroJugador).append(" el n&uacute;mero secreto es menor<br>");
+                            mensaje.append(" el número secreto es menor<br>");
                         }
                     }
                 } catch (NumberFormatException e) {
-                    mensaje.append("Por favor, introduce un n&uacute;mero v&aacute;lido.<br>");
+                    mensaje.append("Por favor, introduce un número válido.<br>");
                 }
             }
         %>
@@ -76,7 +76,7 @@
         <form method="post" action="adivinarNumero.jsp">
             <label for="numeroJugador">Introduce un número del 1 al 100:</label>
             <!-- PARA INTRODUCIR LOS DATOS DEL USUARIO -->
-            <input type="text" id="numeroJugador" name="numeroJugador" required>
+            <input type="number" max="100" min="1" id="numeroJugador" name="numeroJugador" required>
 
             <!-- PASAMOS LOS PARÁMETROS PARA MANTENER LOS DATOS EN UN CAMPO OCULTO -->
             <input type="hidden" name="numeroSecreto" value="<%= numeroSecreto%>">
@@ -108,7 +108,7 @@
 
         <br>
         <a href="adivinarNumero.jsp">Probar de nuevo</a>
-        <a href="adivinarNumero.jsp">Inicio</a>
+        <a href="<%=request.getContextPath()%>">Inicio</a>
 
     </body>
 </html>
