@@ -46,7 +46,7 @@
 
             mensaje.append(sexo).append(request.getParameter("nombre"));
         %>
-        <<h2><%=mensaje.toString()%></h2>
+        <h2><%=mensaje.toString()%></h2>
         <p> <a href="<%=request.getContextPath() %>" >Menú </p>
         
         <!-- Lo que falta son los campos del input y sexo valor y el submit -->

@@ -35,7 +35,6 @@
                 <tr>
                     <td>Segundo número:</td>
                     <td><input name="param2"></td>
-                    Página: 6
                 </tr>
                 <tr>
                     <td><input type="submit" value="Sumar"></td>
