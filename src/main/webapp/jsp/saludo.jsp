@@ -35,7 +35,10 @@
         <%
             StringBuilder mensaje = new StringBuilder("Buen");
             int horas = LocalTime.now().getHour();
-            String sexo = (request.getParameter("sexo").equals("hombre")) ? " señor " : " señora ";
+            String sexo = (request.getParameter("genero").equals("hombre")) ? " señor " : " señora ";
+            if (sexo.equals("hombre")) {
+                    
+                }
             if (horas >= 8 && horas < 13) {
                 mensaje.append("os días");
             } else if (horas >= 13 && horas < 20) {

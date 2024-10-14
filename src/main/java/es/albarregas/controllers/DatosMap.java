@@ -96,6 +96,7 @@ public class DatosMap extends HttpServlet {
             out.println("<title>Servlet DatosForm</title>");
             out.println("</head>");
             out.println("<body>");
+            out.println("<h1>Formulario de Datos</h1>");
 
             Map<String, String[]> parametros = request.getParameterMap();
 
@@ -104,7 +105,7 @@ public class DatosMap extends HttpServlet {
                 String valor[] = p.getValue();
 
                 if (clave.equals("preferencias")) { // si el valor 
-                   
+
                     if (p.getValue().length > -1) { // o si la longitud es == a 1 entonces solo mostrar la posi 0
                         for (int i = 0; i < p.getValue().length; i++) {
 
@@ -117,15 +118,15 @@ public class DatosMap extends HttpServlet {
 
                             }
                         }
-                   
+
                     }
                 } else if (!clave.equalsIgnoreCase("enviar")) {// .replaceAll("."," ") sirve para poner espacion en blanco
-                   
+
                     if (!clave.equalsIgnoreCase("fecha_Nacimiento")) {
-                       
+
                         out.println("<p>" + clave + " : " + p.getValue()[0] + "</p>");
                     } else {
-                      
+
                         out.println("<p>" + clave + " : " + p.getValue()[0] + "</p>");
                     }
 
@@ -135,7 +136,7 @@ public class DatosMap extends HttpServlet {
 
             //ITERAR SOBRE EL MAP
             // INICIO TEXTO ADAPTAR
-            out.println("<h1>Servlet DatosForm at " + request.getContextPath() + "</h1>");
+            out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
             out.println("</body>");
             out.println("</html>");
         }

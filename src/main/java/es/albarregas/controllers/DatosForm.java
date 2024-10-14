@@ -71,10 +71,10 @@ public class DatosForm extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet DatosForm</title>");
-        //    out.println("<link rel=\"stylesheet\" href=\"../../css/style.css\"/>");
+            //    out.println("<link rel=\"stylesheet\" href=\"../../css/style.css\"/>");
             out.println("</head>");
             out.println("<body>");
-
+            out.println("<h1>Formulario de Datos</h1>");
             Enumeration<String> parametros = request.getParameterNames();
             if (parametros.hasMoreElements()) {
                 while (parametros.hasMoreElements()) {
@@ -85,7 +85,7 @@ public class DatosForm extends HttpServlet {
                         char mayuscula = nombre.toUpperCase().charAt(0);
                         String nuevoNombre = mayuscula + nombre.substring(1);
                         if (preferencias.length == 1) { // o si la longitud es == a 1 entonces solo mostrar la posi 0
-                           
+
                             out.println("<p>El valor de " + nuevoNombre + " es " + preferencias[0] + "</p>");
                             out.println("Esto es si preferencias solo tiene una posición");
                         } else { // si hay solo una posicion  if (preferencias.length == 0)
@@ -117,18 +117,17 @@ public class DatosForm extends HttpServlet {
                             out.println("<p>" + nuevoNombre + " : " + nueva_Fecha + "</p>");
 
                         }
-
-                    } 
+                    }
                 }
-               
-            }
 
-            out.println("<h1>Servlet DatosForm at " + request.getContextPath() + "</h1>");
+            }
+             out.println("<a href='"+request.getContextPath()+"'>Inicio</a>");
             out.println("</body>");
             out.println("</html>");
         }
 
     }
+
     /**
      * Returns a short description of the servlet.
      *

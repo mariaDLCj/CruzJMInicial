@@ -104,7 +104,7 @@ public class RecordarDatos extends HttpServlet {
             out.println("<title>Servlet RecordarDatos</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RecordarDatos at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Formulario que Recuerda Datos</h1>");
 
             /* INTENTO CON ENUMERATION  */
             //PODRÍA SER QUE TUVIERAS QUE LIMPIAR PARAMETROS SI USAS EL ENUMERATION AQUI ARRIBA DE TODO
@@ -173,15 +173,12 @@ public class RecordarDatos extends HttpServlet {
                     formulario.append("<input type=\"submit\" name=\"primera\" value=\"Enviar\">\n").append("</form>");
                     out.println(formulario.toString());
                 }// fin if de parametroshasmore
-
             }// fin del if else inicial
+            out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
             out.println("</body>");
             out.println("</html>");
         }//fin try
     }//fin post
-    
-    
-
 
     /**
      * Returns a short description of the servlet.

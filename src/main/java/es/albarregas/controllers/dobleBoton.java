@@ -70,7 +70,7 @@ public class dobleBoton extends HttpServlet {
             out.println("<title>Servlet dobleBoton</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet dobleBoton at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Formulario de Doble Botón</h1>");
             /*
             OBTENEMOS EL VALOR DEL BOTÓN, QUE SI ES ENUM NOS TRAERÁ
             LOS DATOS MEDIANTE EL ENUMERATION Y EN CASO CONTRARIO 
@@ -135,16 +135,14 @@ public class dobleBoton extends HttpServlet {
                     String valor[] = p.getValue();
 
                     if (clave.equals("preferencias")) { // si el valor 
-                  
+
                         if (p.getValue().length >= 0) {
                             for (int i = 0; i < p.getValue().length; i++) {
                                 if (!valor[i].equals("")) {
-
                                     // imprimir e un alista desordenada
                                     out.println("<ul>");
                                     out.println("<li>" + p.getValue()[i] + "</li>");
                                     out.println("</ul>");
-
                                 }
                             }
                         }
@@ -160,6 +158,7 @@ public class dobleBoton extends HttpServlet {
                 }
                 /*FIN DEL MAP*/
             }
+            out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
             out.println("</body>");
             out.println("</html>");
         }

@@ -110,7 +110,7 @@ public class DirectoControlador extends HttpServlet {
             out.println("<title>Servlet DirectoControlador</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet DirectoControlador DOPOST at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Directo al Controlador</h1>");
 
             Map<String, String[]> parametros = request.getParameterMap();
 
@@ -119,7 +119,7 @@ public class DirectoControlador extends HttpServlet {
                 String valor[] = p.getValue();
                 // FORMULARIO CORRECTO
                 if (clave.equals("preferencias")) { // si el valor 
-  
+
                     if (p.getValue().length >= 0) { // o si la longitud es == a 1 entonces solo mostrar la posi 0
                         for (int i = 0; i < p.getValue().length; i++) {
                             if (valor[i] != null) {
@@ -131,12 +131,12 @@ public class DirectoControlador extends HttpServlet {
 
                             }
                         }
-                      
+
                     }
                 } else if (!clave.equalsIgnoreCase("enviar")) {// .replaceAll("."," ") sirve para poner espacion en blanco
-                   
+
                     if (!clave.equalsIgnoreCase("fecha_Nacimiento")) {
-                        
+
                         out.println("<p>" + clave + " : " + p.getValue()[0] + "</p>");
                     } else {
                         out.println("<p>" + clave + " : " + p.getValue()[0] + "</p>");
@@ -146,7 +146,7 @@ public class DirectoControlador extends HttpServlet {
                 } // fin form correctamente
 
             } // fin for2
-
+            out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
             out.println("</body>");
             out.println("</html>");
         }

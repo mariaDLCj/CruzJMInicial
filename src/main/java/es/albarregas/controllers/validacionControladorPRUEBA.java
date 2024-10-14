@@ -125,6 +125,7 @@ public class validacionControladorPRUEBA extends HttpServlet {
             out.println("<title>Esto es el do POST</title>");
             out.println("</head>");
             out.println("<body>");
+            out.println("<h1>Formulario de Validado</h1>");
 
             Map<String, String[]> parametros = request.getParameterMap();
 
@@ -154,7 +155,7 @@ public class validacionControladorPRUEBA extends HttpServlet {
                     String valor[] = p.getValue();
                     // FORMULARIO CORRECTO
                     if (clave.equals("preferencias")) {
-                        
+
                         if (p.getValue().length >= 0) { // o si la longitud es == a 1 entonces solo mostrar la posi 0
                             for (int i = 0; i < p.getValue().length; i++) {
                                 if (valor[i] != null) {
@@ -172,7 +173,7 @@ public class validacionControladorPRUEBA extends HttpServlet {
                     } else if (!clave.equalsIgnoreCase("enviar")) {
 
                         if (!clave.equalsIgnoreCase("fecha_Nacimiento")) {
-                            
+
                             out.println("<p>" + clave + " : " + p.getValue()[0] + "</p>");
                         } else {
 
@@ -185,11 +186,7 @@ public class validacionControladorPRUEBA extends HttpServlet {
                 } // fin for2
             } // fin else
 
-           
-            out.println("</body>");
-            out.println("</html>");
-
-            out.println("<p>Servlet validacionControladorPRUEBA at " + request.getContextPath() + "</p>");
+            out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
             out.println("</body>");
             out.println("</html>");
 
@@ -206,6 +203,5 @@ public class validacionControladorPRUEBA extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 
 }

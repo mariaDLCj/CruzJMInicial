@@ -57,9 +57,8 @@ public class Controlador extends HttpServlet {
             out.println("<title>Servlet Controlador</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controlador at " + request.getContextPath() + "</h1>");
-            out.println("<h2>Para volver pulse " + request.getContextPath() + "</h2>");
-            out.println("<a href='.'>'VOLVER'</a>");
+            out.println("<h1>Accediendo al Controlador</h1>");
+            out.println("<a href='.'>Inicio</a>");
             // se usa . porq el welcome file es el inicial en la web.xml
             //VISUALIZAR CONTINIDO PARAM 1 OPCION 2
             //Prueba
