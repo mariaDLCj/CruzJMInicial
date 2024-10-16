@@ -82,6 +82,11 @@
         <%            // final del try
             cookie.setMaxAge(3600);
             response.addCookie(cookie);
+            /*response.addCookie(user) esto añade la cookie al request[] de las cookies
+
+            si el nombre.lenth es != 0 
+                    disabled
+            sino pues el input normal*/
         %>
 
     </body>

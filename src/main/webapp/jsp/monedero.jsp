@@ -1,9 +1,3 @@
-<%-- 
-    Document   : monedero
-    Created on : 9 oct 2024, 20:43:05
-    Author     : badoe
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,145 +16,124 @@
             int NumB500, NumB200, NumB100, NumB50, NumB20, NumB10, NumB5 = 0;
             int NumE2, NumE1, NumC50, NumC20, NumC10, NumC5, NumC05, NumC02, NumC01 = 0;
 
-            try {
-            
-            /*
-                Monedero: 
+            // VAMOS A CALCULAR LA VUELTA
+            double vuelta = cantidad - precio;
+            boolean correcto = false;
+            int contadormoneda;
+            Double numero = 500.0; // este es el que coge el valor de numero Billete de 521
+            int numBilletes = 0;
 
-                posibles patrones:
-
-                500 200 100 	x100
-
-                50   20  10 	x10 5 / 2 como entero = 2
-
-                5     2   1 		x1
-
-                0.5 0.2 0.1  	x0.1 si contiene un 5 se divide entre 2'5 sino entre 2 
-                                        lo pasas a cadena y miras si tiene un 5 con contains
-                0.05 0.02 0.01  x0.01
-
-                Se v adiviendo entre 10 desde el 100 hasta 0.01
-
-                todo esto va en un while ()
-                 */
-                // VAMOS A CALCULAR LA VUELTA
-                double vuelta = cantidad - precio;
-                // while (cantidad != 0) {
-
-                NumB500 = (int) (vuelta / 500);
-                vuelta -= NumB500 * 500;
-
-                NumB200 = (int) (vuelta / 200);
-                vuelta -= NumB200 * 200;
-
-                NumB100 = (int) (vuelta / 100);
-                vuelta -= NumB100 * 100;
-
-                NumB50 = (int) (vuelta / 50);
-                vuelta -= NumB50 * 50;
-
-                NumB20 = (int) (vuelta / 20);
-                vuelta -= NumB20 * 20;
-
-                NumB10 = (int) (vuelta / 10);
-                vuelta -= NumB10 * 10;
-
-                NumB5 = (int) (vuelta / 5);
-                vuelta -= NumB5 * 5;
-
-                NumE2 = (int) (vuelta / 2);
-                vuelta -= NumE2 * 2;
-
-                NumE1 = (int) (vuelta / 1);
-                vuelta -= NumE1 * 1;
-
-                NumC50 = (int) (vuelta / 0.50);
-                vuelta -= NumC50 * 0.50;
-
-                NumC20 = (int) (vuelta / 0.20);
-                vuelta -= NumC20 * 0.20;
-
-                NumC10 = (int) (vuelta / 0.10);
-                vuelta -= NumC10 * 0.10;
-
-                NumC5 = (int) (vuelta / 0.05);
-                vuelta -= NumC5 * 0.05;
-
-                NumC02 = (int) (vuelta / 0.02);
-                vuelta -= NumC02 * 0.02;
-
-                NumC01 = (int) (vuelta / 0.01);
-                vuelta -= NumC01 * 0.01;
-
-                if (NumB500 > 0) {
-                %>
-                <p>Billete 500: <%= NumB500 %> </p>
-                <%
+            while (vuelta >= 0.01) {
+                if (numero != 0) {
+                    numBilletes = (int) (vuelta / numero);
+                    vuelta = vuelta - (numero * numBilletes); // corregido: vuelta - (numero * numBilletes)
+                    if (numero > 0.00) {
+                        // Imprimir la cantidad de billetes/monedas según corresponda
+                        %>
+                        <p>"Billetes/Monedas de <%= numero %> : <%=numBilletes%>);</p>
+                        <%
+                    }
                 }
-                if (NumB200 > 0) {
-                %>
-                <p>Billete 200: <%= NumB200 %> </p>
-                <%                }
-                if (NumB100 > 0) {
-                %>
-                <p>Billete 100: <%= NumB100 %> </p>
-                <%                }
-                if (NumB50 > 0) {
-                %>
-                <p>Billete 50: <%= NumB50 %> </p>
-                <%                 }
-                if (NumB20 > 0) {
-                %>
-                <p>Billete 20: <%= NumB20 %> </p>
-                <%                 }
-                if (NumB10 > 0) {
-                %>
-                <p>Billete 10: <%= NumB10 %> </p>
-                <%                 }
-                if (NumB5 > 0) {
-                %>
-                <p>Billete 5: <%= NumB5 %> </p>
-                <%                 }
+                String numText = String.valueOf(numero);
+                if (numText.contains("5")) {
+                    numero /= 2.5;
+                } else {
+                    numero /= 2; // corregido: numero /= numero / 2
+                }
+            }// fin
 
-                if (NumE2 > 0) {
-                %>
-                <p>Monedas 2 <%= NumE2 %> </p>
-                <%                 }
-                if (NumE1 > 0) {
-                %>
-                <p>Monedas 1 <%= NumE1 %> </p>
-                <%                  }
-                if (NumC50 > 0) {
-                %>
-                <p>Monedas 50 Cent <%= NumC50 %> </p>
-                <%                  }
-                if (NumC20 > 0) {
-                %>
-                <p>Monedas 20 Cent <%= NumC20 %> </p>
-                <%                  }
-                if (NumC10 > 0) {
-                %>
-                <p>Monedas 10 Cent <%= NumC10 %> </p>
-                <%                  }
-                if (NumC5 > 0) {
-                %>
-                <p>Monedas 5 Cent <%= NumC5 %> </p>
-                <%                  }
-                if (NumC02 > 0) {
-                %>
-                <p>Monedas 2 Cent <%= NumC02 %> </p>
-                <%                  }
-                if (NumC01 > 0) {
-                %>
-                <p>Monedas 1 Cent <%= NumC01 %> </p>
-                <%                  }
-                //}
-                // VAMOS A SACAR LA CANTIDAD DE BILLETES O MONEDAS
-            } catch (NumberFormatException e) {
-                mensaje.append("Valores incorrectos");
-            }
+// Imprimir la vuelta restante
+            
+
+            /*
+Monedero bueno:
+numero = 500 double
+int numBilletes = 0
+            
+pasas los reuqest a double en el try
+si se aprse abien se calcula la diferencia es mi vuelta
+MEterle un formateador a la vuelta
+imprimri si las cantodDES SON validas imprimes la diferencia
+            
+while (diferencia >= 0.01) {
+if numero != 0 pa que no dibida entre 0
+nuemroBilletes = int diferencia / numero
+diferencia = diferencia -(diferencia *numBillete);
+                   
+si el numBilletes es > 0.00{
+imprimes el 
+}
+<p>  2 billetes de 500
+} fin del if primero
+cojo el numero double y lo transformo en texto
+String numTExt= String.valueOf(numero);
+if (numText.contains("5") {
+        numero /= 2.5;
+    } else {
+        numero /= numero / 2;
+    }                
+} // fin del while
+                        
+abre div que se cierra tras el while 
+metes 500€ 1 canyidad
+fin monedero bueno
+        
+             */
+ /*          
+if (precio <= cantidad) {
+if (vuelta != 0) {
+while (billeteMoneda >= 0.01 && vuelta != 0) {
+    contadormoneda = 0;
+    while (vuelta >= billeteMoneda) {
+        vuelta -= billeteMoneda;
+        vuelta = Math.round(vuelta * 100) / 100;
+        // vuelta = MathRandom.round (vuelta * 100) /100; // - para que vueltas n te den tantos decimales sino 2
+        //mirar en intermet que te salgan 2 números
+        contadormoneda++;
+    }
+    if (contadormoneda > 0) {
+        mensaje.append("Billete de ").append(billeteMoneda).append(": ").append(contadormoneda).append("<br>");
+        //imprimes la moneda
+        //jpg y la clase
+    }
+    if (billeteMoneda > 2) {
+        mensaje.append("Monedas de ").append(billeteMoneda).append(": ").append(contadormoneda).append("<br>");
+        //imprimes la moneda
+        //png y la clase
+    }
+    if (String.valueOf(billeteMoneda).contains("5")) {
+        billeteMoneda = billeteMoneda / 2.5;
+    } else {
+        billeteMoneda = billeteMoneda / 2;
+    }
+}
+//  mensaje.append(billeteMoneda);
+}
+}
+             */
+ /*
+            
+            
+Monedero: 
+
+posibles patrones:
+
+500 200 100 	x100
+
+50   20  10 	x10 5 / 2 como entero = 2
+
+5     2   1 		x1
+
+0.5 0.2 0.1  	x0.1 si contiene un 5 se divide entre 2'5 sino entre 2 
+                    lo pasas a cadena y miras si tiene un 5 con contains
+0.05 0.02 0.01  x0.01
+
+Se v adiviendo entre 10 desde el 100 hasta 0.01
+
+todo esto va en un while ()
+             */
         %>
-        <h1><%= mensaje %></h1>
+        <h1><%= mensaje%></h1>
         <button type="button" onclick="location.href = '<%=request.getContextPath()%>'">Men&uacute; Inicial</button>
     </body>
 </html>
