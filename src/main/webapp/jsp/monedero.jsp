@@ -19,16 +19,14 @@
             // VAMOS A CALCULAR LA VUELTA
             double vuelta = cantidad - precio;
             boolean correcto = false;
-            int contadormoneda;
-            Double numero = 500.0; // este es el que coge el valor de numero Billete de 521
+            Double numero = 500.0;
             int numBilletes = 0;
 
             while (vuelta >= 0.01) {
                 if (numero != 0) {
                     numBilletes = (int) (vuelta / numero);
-                    vuelta = vuelta - (numero * numBilletes); // corregido: vuelta - (numero * numBilletes)
+                    vuelta = vuelta - (numero * numBilletes); 
                     if (numero > 0.00) {
-                        // Imprimir la cantidad de billetes/monedas según corresponda
                         %>
                         <p>"Billetes/Monedas de <%= numero %> : <%=numBilletes%>);</p>
                         <%
@@ -38,7 +36,7 @@
                 if (numText.contains("5")) {
                     numero /= 2.5;
                 } else {
-                    numero /= 2; // corregido: numero /= numero / 2
+                    numero /= 2;
                 }
             }// fin
 

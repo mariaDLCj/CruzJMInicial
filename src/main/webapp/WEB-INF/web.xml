@@ -40,6 +40,10 @@
         <servlet-name>CicloVidaServlet</servlet-name>
         <servlet-class>es.albarregas.controllers.CicloVidaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cabeceraPeticion</servlet-name>
+        <servlet-class>es.albarregas.controllers.cabeceraPeticion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DatosForm</servlet-name>
         <url-pattern>/DatosForm</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>CicloVidaServlet</servlet-name>
         <url-pattern>/CicloVidaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cabeceraPeticion</servlet-name>
+        <url-pattern>/cabeceraPeticion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
