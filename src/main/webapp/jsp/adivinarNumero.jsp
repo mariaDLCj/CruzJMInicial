@@ -1,3 +1,5 @@
+
+
 <%@page import="java.util.Random"%>
 <%@page import="java.lang.StringBuilder"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -6,18 +8,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Número Secreto</title>
-        <link  href="<%=request.getContextPath()%>/css/adivinarNumero.css"/>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/adivinarNumero.css">
 
     </head>
     <body>
         <h1>Juego del n&uacute;mero secreto</h1>
-        <h2>El ordenador piensa en un n&uacute;mero del 1 al 100 y tenemos que adivinarlo en la menor cantirdad de intentos posibles.</h2>
 
         <%
             /*PARA PODER MANTENER LA INFORMACIÓN AL IGUAL QUE EN OTROS EJERCICIOS
             SE PASAN ALGUNOS PARÁMETROS A TRAVÉS DE CAMPOS INVISIBLES EN EL FORMULARIO
             EN ESTE CASO SERÁ EL NÚMERO SECRETO, EL NÚMERO DE INTENTOS Y EL MENSAJE
-            PARA QUE NO SE BORRE A CADA INTENTO. SE RECUPERAN DE LA LÍNEA 81.*/
+            PARA QUE NO SE BORRE A CADA INTENTO. SE RECUPERAN DE LA LÍNEA 85.*/
             String numeroSecretoParam = request.getParameter("numeroSecreto");
             String intentosParam = request.getParameter("intentos");
             String mensajeParam = request.getParameter("mensaje");
@@ -52,7 +53,7 @@
                 try {
                     int numeroJugador = Integer.parseInt(intentoJugador);
                     intentos++;
-                    numerosJugados.append(numeroJugador).append("<br>"); // Agregar número jugado a la lista
+                    numerosJugados.append(numeroJugador).append("<br>");
                     // COMPROBAMOS QUE EL NÚMERO ES DEL RANGO ELEGIDO
                     if (numeroJugador > 100 || numeroJugador < 1) {
                         mensaje.append("Introduce un número del 1 al 100, por favor.");
@@ -72,6 +73,8 @@
             }
         %>
 
+        <div class="contenedor">
+        <p>El ordenador piensa en un n&uacute;mero del 1 al 100 y tenemos que adivinarlo en la menor cantirdad de intentos posibles.</p>
 
         <form method="post" action="adivinarNumero.jsp">
             <label for="numeroJugador">Introduce un número del 1 al 100:</label>
@@ -109,6 +112,6 @@
         <br>
         <a href="adivinarNumero.jsp">Probar de nuevo</a>
         <a href="<%=request.getContextPath()%>">Inicio</a>
-
+        </div>
     </body>
 </html>
