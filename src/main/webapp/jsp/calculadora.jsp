@@ -15,19 +15,19 @@
             StringBuilder mensaje = new StringBuilder();
 
             //FUNCIONES QUE VAN A HACER EL CÁLCULO
-            public Double sumar(Double param1, Double param2) {
+            public int sumar(int param1, int param2) {
                 return param1 + param2;
             }
 
-            public Double multiplicar(Double param1, Double param2) {
+            public int multiplicar(int param1, int param2) {
                 return param1 * param2;
             }
 
-            public Double restar(Double param1, Double param2) {
+            public int restar(int param1, int param2) {
                 return param1 - param2;
             }
 
-            public Double dividir(Double param1, Double param2) {
+            public double dividir(int param1, int param2) {
                 if (param2 != 0) {
                     return param1 / param2;
                 } else {
@@ -78,8 +78,8 @@
                     // LIMPIO EL STRINGBUILDER
                     String operacion = request.getParameter("operacion");
                     try {
-                        Double param1 = Double.parseDouble(request.getParameter("param1"));
-                        Double param2 = Double.parseDouble(request.getParameter("param2"));
+                        int param1 = Integer.parseInt(request.getParameter("param1"));
+                        int param2 = Integer.parseInt(request.getParameter("param2"));
 
                         switch (operacion) {
                             case "sumar":
@@ -99,6 +99,7 @@
                                 break;
                         }
                     } catch (NumberFormatException ex) {
+                        // SI VAN VACÍO SALTA EL MENSAJE
                         mensaje.append("Todos los campos deben ir rellenos con datos válidos");
                     } catch (ArithmeticException e) {
                         // RECOJO LA EXCEPCIÓN DE ARRIBA
@@ -106,13 +107,13 @@
                     }
             %>
             <div class="contenedor">
-            <p><%= mensaje%></p>
-            <%
-                }
-            %>
+                <p><%= mensaje%></p>
+                <%
+                    }
+                %>
 
-            <p><%= Calendar.getInstance().getTime()%></p>
-            <a href="../index.html">Inicio</a>
+                <p><%= Calendar.getInstance().getTime()%></p>
+                <a href="../index.html">Inicio</a>
             </div>
     </body>
 </html>
