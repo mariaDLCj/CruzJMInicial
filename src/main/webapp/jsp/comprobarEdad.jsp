@@ -81,6 +81,7 @@
         %>
         <div class="contenedor">
             <h2><%=mensaje.toString()%></h2>
+            <a href="<%=request.getContextPath()%>" >Inicio</a>
         </div>
     </body>
 </html>
