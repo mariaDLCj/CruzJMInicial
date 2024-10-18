@@ -8,14 +8,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/comprobarEdad.css"/>
     </head>
     <body>
-         <form action="../jsp/comprobarEdad.jsp" method="post">
-            <label>Nombre:</label>
-            <input type="text" name="nombre"><br>
-            <label>Fecha Nacimiento</label>
-            <input type="date" name="fecha_Nacimiento"><br>
-            <input type="submit" name="enviar">
-        </form>
+        <div class="contenedor">
+            <form action="../jsp/comprobarEdad.jsp" method="post">
+                <label>Nombre:</label>
+                <input type="text" name="nombre"><br>
+                <label>Fecha Nacimiento</label>
+                <input type="date" name="fecha_Nacimiento"><br>
+                <input type="submit" name="enviar">
+            </form>
+        </div>
     </body>
 </html>

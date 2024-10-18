@@ -1,9 +1,3 @@
-<%-- 
-    Document   : comprobarEdad
-    Created on : 4 oct 2024, 16:31:39
-    Author     : badoe
---%>
-
 <%@page import="java.time.Period"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
@@ -14,6 +8,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Comprobar edad</title>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/comprobarEdad.css">
+
     </head>
     <body>
         <%
@@ -27,44 +23,64 @@
                 mensaje.append("Hola, ").append(request.getParameter("nombre"));
 
                 // SI TODO ESTA A 0 HAS NACIDO HOY
-                
                 // PENSAR MEJOR LO DE LAS COMAS Y LAS Y
-                
                 // ESTO ESTA MAL
                 if (fechaNac.isAfter(ahora)) {
-                    mensaje.append(" aún no has nacido");
-                }else{
-                
-                //COMPROBAMOS EL TIEMPO
-                if (periodo.getYears() > 1) {
-                    mensaje.append(" has nacido hace ").append(periodo.getYears()).append(" años");
-                } else if (periodo.getYears() == 1) {
-                    mensaje.append(" has nacido hace ").append(periodo.getYears()).append(" año");
-                }
-
-                if (periodo.getMonths() > 0) {
-                    mensaje.append(", ");
-                }
-
-                if (periodo.getMonths() > 1) {
-                    mensaje.append(periodo.getMonths()).append(" meses");
-                } else if (periodo.getMonths() == 1) {
-                    mensaje.append(periodo.getMonths()).append(" mes");
-                }
-
-                if (periodo.getMonths() >0 || periodo.getYears() > 0 && periodo.getDays() > 0) {
-                    mensaje.append(" y ");
+                    mensaje.append(" aún no has nacido.");
+                } else if (fechaNac.isEqual(ahora)) {
+                    mensaje.append(" has nacido hoy.");
                 } else {
+
                     mensaje.append(" has nacido hace ");
+
+                    //COMPROBAMOS AÑOS
+                    if (periodo.getYears() > 1) {
+                        mensaje.append(periodo.getYears()).append(" años");
+                    } else if (periodo.getYears() == 1) {
+                        mensaje.append(periodo.getYears()).append(" año");
+                    }
+
+                    // SU HAY MESES AÑADES UNA COMA, SINO HAY MESES Y HAY DÍAS AÑADES Y
+                    // SI NINGUNO PUES AÑADES .
+                    if (periodo.getYears() > 0 && periodo.getMonths() > 0 && periodo.getDays() > 0) {
+                        mensaje.append(", ");
+                        // sino hay meses pero si dias
+                    } else if (periodo.getMonths() <= 0 && periodo.getDays() <= 0) {
+                        mensaje.append(" .");
+                    } else if (periodo.getMonths() > 0 && periodo.getYears() > 0 && periodo.getDays() <= 0) {
+                        mensaje.append(" y ");
+                    }
+
+                    // SI ES UN MES O MÁS
+                    if (periodo.getMonths() > 1) {
+                        mensaje.append(periodo.getMonths()).append(" meses");
+                    } else if (periodo.getMonths() == 1) {
+                        mensaje.append(periodo.getMonths()).append(" mes");
+                    }
+
+                    // SI NO HAY DIAS PONES .
+                    if (periodo.getDays() <= 0 && periodo.getMonths() > 0) {
+                        mensaje.append(" .");
+                    } else if (periodo.getDays() > 0 && (periodo.getMonths() > 0 || periodo.getYears() > 0)) {
+                        mensaje.append(" y ");
+                    }
+
+                    if (periodo.getDays() > 1) {
+                        mensaje.append(periodo.getDays()).append(" días.");
+                    } else if (periodo.getDays() == 1) {
+                        mensaje.append(periodo.getDays()).append(" un día.");
+                    }
                 }
 
-                if (periodo.getDays() > 1) {
-                    mensaje.append(periodo.getDays()).append(" días");
-                } else if (periodo.getDays() == 1) {
-                    mensaje.append(periodo.getDays()).append(" día");
-                }                
+            } else {
+                mensaje.append(periodo.getDays()).append("Por favor, rellena los campos");
+        %>
+        <a href="<%=request.getContextPath()%>/html/comprobarEdad.html" >Volver</a>
+        <%
             }
         %>
-        <h2><%=mensaje.toString()%></h2>
+        <div class="contenedor">
+            <h2><%=mensaje.toString()%></h2>
+        </div>
     </body>
 </html>
