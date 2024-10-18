@@ -1,170 +1,118 @@
-<%-- 
-    Document   : calculadora
-    Created on : 3 oct 2024, 17:04:09
-    Author     : badoe
---%>
-
 <%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Calculadora</title>
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/css/calculadora.css"/>
+
     </head>
     <body>
         <h1>Calculadora!</h1>
 
         <%!
-            public int sumar(int param1, int param2) {
+            StringBuilder mensaje = new StringBuilder();
+
+            //FUNCIONES QUE VAN A HACER EL CÁLCULO
+            public Double sumar(Double param1, Double param2) {
                 return param1 + param2;
             }
 
-            public int multiplicar(int param1, int param2) {
+            public Double multiplicar(Double param1, Double param2) {
                 return param1 * param2;
             }
 
-            public int restar(int param1, int param2) {
+            public Double restar(Double param1, Double param2) {
                 return param1 - param2;
             }
 
-            public int dividir(int param1, int param2) {
-                if (param2 > 0 && param1 > 0) {
+            public Double dividir(Double param1, Double param2) {
+                if (param2 != 0) {
                     return param1 / param2;
-
                 } else {
-        %>
-        <p>Se está intentando dividir entre 0</p>
-        <%!   return -1;
+                    // LANZO LA EXCEPCIÓN DE DIVIDIR POR 0
+                    throw new ArithmeticException("Se está intentando dividir entre 0");
                 }
             }
-            //puedes mandar por texto el mesnaje de error con 
-%>
-<%
-            if (request.getParameter("enviar") == null) {
         %>
-        <form method="post" action="calculadora.jsp" >
-            <input type="submit" name="enviar" value="true">
-            <table>
-                <tr>
-                    <td>Primer número:</td>
-                    <td><input name="param1"></td>
-                </tr>
-                <tr>
-                    <td>Segundo número:</td>
-                    <td><input name="param2"></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Sumar"></td>
-                </tr>
+        <div class="contenedor">
+            <form method="post" action="calculadora.jsp">
 
                 <tr>
-                    <td> <input type="radio" name="operacion" value="sumar" checked />
-                        <label>Sumar</label></td>
-                    <td> <input type="radio" name="operacion" value="restar" />
-                        <label>Restar</label></td>
-                    <td> <input type="radio" name="operacion" value="multiplicar"/>
-                        <label>Multiplicar</label></td>
-                    <td> <input type="radio" name="operacion" value="dividir"/>
-                        <label>Dividir</label></td>
+                    <td>Primer n&uacute;mero:</td>
+                    <td><input type="text" name="param1"></td>
                 </tr>
-            </table>
-        </form>
+                <tr>
+                    <td>Segundo n&uacute;mero:</td>
+                    <td><input type="text" name="param2"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="operacion" value="sumar" checked />
+                        <label>Sumar</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="operacion" value="restar" />
+                        <label>Restar</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="operacion" value="multiplicar"/>
+                        <label>Multiplicar</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="operacion" value="dividir"/>
+                        <label>Dividir</label>
+                    </td>
+                </tr>
+                <tr>
+                <input type="submit" name="enviar" value="Calcular"></td>
+                </tr>
 
-        <%
-        } else {
-            String operacion = request.getParameter("operacion");
-            switch (operacion) {
-                case "sumar":
+                </div>
+            </form>
+
+            <%
+                if (request.getParameter("enviar") != null) {
+                    mensaje = new StringBuilder();
+                    // LIMPIO EL STRINGBUILDER
+                    String operacion = request.getParameter("operacion");
                     try {
-                    int param1 = Integer.parseInt(request.getParameter("param1"));
-                    int param2 = Integer.parseInt(request.getParameter("param2"));
-                    int result = param1 + param2;
-        %>
-        <p>El resultado de la suma es: <%= sumar(param1, param2)%></p>
-        <%
-        } catch (NumberFormatException ex) {
-        %>
-        <p>Alguno de los números no contenía dígitos válidos...</p>
-        <%
-        }//CIERRE DEL CATCH SUMAR
-        break; // BREAK DE SUMAR
-        %>
-        <p><%= Calendar.getInstance().getTime()%></p>
-        <a href="../index.html">Volver atrás...</a>
+                        Double param1 = Double.parseDouble(request.getParameter("param1"));
+                        Double param2 = Double.parseDouble(request.getParameter("param2"));
 
-        <%
-            case "restar":
-                    try {
-                int param1 = Integer.parseInt(request.getParameter("param1"));
-                int param2 = Integer.parseInt(request.getParameter("param2"));
-                int result = param1 - param2;
-        %>
-        <p>El resultado de la resta es: <%= restar(param1, param2)%></p>
-        <%
-        } catch (NumberFormatException ex) {
-        %>
-        <p>Alguno de los números no contenía dígitos válidos...</p>
-        <%
-            }//CIERRE DEL CATCH RESTAR
-            break; // BREAK DE RESTAR
-        %>
+                        switch (operacion) {
+                            case "sumar":
+                                mensaje.append("El resultado de la suma es: ").append(sumar(param1, param2));
+                                break;
+                            case "restar":
+                                mensaje.append("El resultado de la resta es: ").append(restar(param1, param2));
+                                break;
+                            case "multiplicar":
+                                mensaje.append("El resultado de la multiplicación es: ").append(multiplicar(param1, param2));
+                                break;
+                            case "dividir":
+                                mensaje.append("El resultado de la división es: ").append(dividir(param1, param2));
+                                break;
+                            default:
+                                mensaje.append("Operación no válida.");
+                                break;
+                        }
+                    } catch (NumberFormatException ex) {
+                        mensaje.append("Todos los campos deben ir rellenos con datos válidos");
+                    } catch (ArithmeticException e) {
+                        // RECOJO LA EXCEPCIÓN DE ARRIBA
+                        mensaje.append(e.getMessage());
+                    }
+            %>
+            <div class="contenedor">
+            <p><%= mensaje%></p>
+            <%
+                }
+            %>
 
-        <%
-            case "multiplicar":
-                    try {
-                int param1 = Integer.parseInt(request.getParameter("param1"));
-                int param2 = Integer.parseInt(request.getParameter("param2"));
-                int result = param1 * param2;
-        %>
-        <p>El resultado de la multiplicación es: <%= multiplicar(param1, param2)%></p>
-        <%
-        } catch (NumberFormatException ex) {
-        %>
-        <p>Alguno de los números no contenía dígitos válidos...</p>
-        <%
-            }//CIERRE DEL CATCH MULTIPLICAR
-            break; // BREAK DE MULTIPLICAR
-        %>
-
-        <%
-            case "dividir":
-                    try {
-                int param1 = Integer.parseInt(request.getParameter("param1"));
-                int param2 = Integer.parseInt(request.getParameter("param2"));
-                int result = param1 / param2;
-        %>
-        <p>El resultado de la división es: <%= dividir(param1, param2)%></p>
-        <%
-        } catch (NumberFormatException ex) {
-        %>
-        <p>Alguno de los números no contenía dígitos válidos...</p>
-        <%
-            }//CIERRE DEL CATCH DIVIDIR
-            break; // BREAK DE DIVIDIR
-        %>
-
-        <%
-            default:
-                    try {
-                int param1 = Integer.parseInt(request.getParameter("param1"));
-                int param2 = Integer.parseInt(request.getParameter("param2"));
-                int result = param1 + param2;
-        %>
-        <p>El resultado de la suma es: <%= sumar(param1, param2)%></p>
-        <%
-        } catch (NumberFormatException ex) {
-        %>
-        <p>Alguno de los números no contenía dígitos válidos...</p>
-        <%
-            }//CIERRE DEL CATCH DEFAULT
-            break; // BREAK DE DIVIDIR
-        %>
-
-        <%
-                }// CIERRE DEL SWITCH
-            }// CIERRE DEL ELSE
-%>
-
+            <p><%= Calendar.getInstance().getTime()%></p>
+            <a href="../index.html">Inicio</a>
+            </div>
     </body>
 </html>
