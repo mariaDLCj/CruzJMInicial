@@ -58,12 +58,10 @@ public class Controlador extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Accediendo al Controlador</h1>");
-            out.println("<a href='.'>Inicio</a>");
             // se usa . porq el welcome file es el inicial en la web.xml
             //VISUALIZAR CONTINIDO PARAM 1 OPCION 2
             //Prueba
             Enumeration<String> parametros = request.getParameterNames();
-           
 
             if (parametros.hasMoreElements()) {
                 while (parametros.hasMoreElements()) {
@@ -72,6 +70,8 @@ public class Controlador extends HttpServlet {
                     out.println("<p>El valor de " + nombre + " es " + request.getParameter(nombre) + "</p>");
                 }
             }
+            out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
+
             out.println("</body>");
             out.println("</html>");
 
@@ -92,9 +92,7 @@ public class Controlador extends HttpServlet {
             throws ServletException, IOException {
         // processRequest(request, response);
         doGet(request, response); // te redirige al doget
-        
-        
-        
+
     }
 
     /**

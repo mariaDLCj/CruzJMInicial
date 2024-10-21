@@ -6,7 +6,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Saludo</title>
-        <link  href="<%=request.getContextPath()%>/css/style.css"/>
         <!-- request.getContextPath esto te da el contexto
             En controlador lo tienes en el titulo 1
         
@@ -30,15 +29,16 @@
         buenas tardes desde 13 hasta las 20 tarde
         buenas noches de 20 a 8
         -->
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/saludo.css">
+
     </head>
     <body>
         <%
             StringBuilder mensaje = new StringBuilder("Buen");
             int horas = LocalTime.now().getHour();
+
             String sexo = (request.getParameter("genero").equals("hombre")) ? " señor " : " señora ";
-            if (sexo.equals("hombre")) {
-                    
-                }
+
             if (horas >= 8 && horas < 13) {
                 mensaje.append("os días");
             } else if (horas >= 13 && horas < 20) {
@@ -49,12 +49,9 @@
 
             mensaje.append(sexo).append(request.getParameter("nombre"));
         %>
-        <h2><%=mensaje.toString()%></h2>
-        <p> <a href="<%=request.getContextPath() %>" >Menú </p>
-        
-        <!-- Lo que falta son los campos del input y sexo valor y el submit -->
-        
-        <input name="sexo">
-
+        <div class="contenedor">
+            <h2><%=mensaje%></h2>
+            <a href="<%=request.getContextPath()%>" >Inicio </a>
+        </div>
     </body>    
 </html>

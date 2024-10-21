@@ -84,19 +84,19 @@ public class DatosForm extends HttpServlet {
                         String[] preferencias = request.getParameterValues(nombre);
                         char mayuscula = nombre.toUpperCase().charAt(0);
                         String nuevoNombre = mayuscula + nombre.substring(1);
-                        if (preferencias.length == 1) { // o si la longitud es == a 1 entonces solo mostrar la posi 0
-
-                            out.println("<p>El valor de " + nuevoNombre + " es " + preferencias[0] + "</p>");
-                            out.println("Esto es si preferencias solo tiene una posición");
-                        } else { // si hay solo una posicion  if (preferencias.length == 0)
-                            out.println("<p>Esto es " + nuevoNombre + "</p>");
-                            for (String p : preferencias) {
-                                if (!p.equals("")) { //si el valor no esta vacio que la imprima
-                                    // imprimir e un alista desordenada
-                                    out.println("<ul>");
-                                    out.println("<li>" + p + "</li>");
-                                    out.println("</ul>");
+                        if (preferencias != null) {
+                            if (preferencias.length == 1) { // o si la longitud es == a 1 entonces solo mostrar la posi 0
+                                out.println("<p>El valor de " + nuevoNombre + " es " + preferencias[0] + "</p>");
+                            } else { 
+                                out.println("<p>Esto es " + nuevoNombre + "</p>");
+                                 out.println("<ul>");
+                                for (String p : preferencias) {
+                                    if (!p.isEmpty() && !p.equals("")) { //si el valor no esta vacio que la imprima (!p.equals("")) 
+                                        // imprimir e un alista desordenada
+                                        out.println("<li>" + p + "</li>");
+                                    }
                                 }
+                                out.println("</ul>");
                             }
                         }
                     } else if (!nombre.equalsIgnoreCase("enviar")) {// .replaceAll("."," ") sirve para poner espacion en blanco
@@ -121,7 +121,7 @@ public class DatosForm extends HttpServlet {
                 }
 
             }
-             out.println("<a href='"+request.getContextPath()+"'>Inicio</a>");
+            out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
             out.println("</body>");
             out.println("</html>");
         }

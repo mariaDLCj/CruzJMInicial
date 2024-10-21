@@ -8,34 +8,35 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/gestionSesion.css"/>
     </head>
     <body>
+        <div class="contenedor">
+            <form action="../jsp/cambiarDivisas.jsp" method="post">
 
-        <form action="../jsp/cambiarDivisas.jsp" method="post">
+                <input type="number" id="cantidad" name="cantidad" step="0.01" required>
 
-            <input type="number" id="cantidad" name="cantidad" required>
+                <label for="origen">Seleccione una moneda de origen</label>
 
-            <label for="origen">Seleccione una moneda de origen</label>
+                <select name="origen" id="origen">
+                    <option value="Euros" selected>Euros</option>
+                    <option value="Yenes">Yenes</option>
+                    <option value="Dolares">Dolares</option>
+                    <option value="Libras">Libras</option>
+                </select>
 
-            <select name="origen" id="origen">
-                <option value="Euros" selected>Euros</option>
-                <option value="Yenes">Yenes</option>
-                <option value="Dolares">Dolares</option>
-                <option value="Libras">Libras</option>
-            </select>
+                <label for="monedaCambio">Seleccione una moneda de cambio</label>
 
-            <label for="monedaCambio">Seleccione una moneda de cambio</label>
+                <select name="monedaCambio" id="monedaCambio">
+                    <option value="Euros">Euros</option>
+                    <option value="Yenes" selected>Yenes</option>
+                    <option value="Dolares">Dolares</option>
+                    <option value="Libras">Libras</option>
+                </select>
 
-            <select name="monedaCambio" id="monedaCambio">
-                <option value="Euros">Euros</option>
-                <option value="Yenes" selected>Yenes</option>
-                <option value="Dolares">Dolares</option>
-                <option value="Libras">Libras</option>
-            </select>
-
-            <input type="submit" name="enviar">
-        </form>
-        <a href="<%=request.getContextPath()%>">Inicio</a>
+                <input type="submit" name="enviar">
+            </form>
+        </div>
 
     </body>
 </html>

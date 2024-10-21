@@ -5,11 +5,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/comprobarEdad.css">
     </head>
     <body>
         <h1>Cambiar divisas</h1>
-        
-        <%            
+
+        <%
             String nuevaMoneda = request.getParameter("monedaCambio");
             String monedaOrigen = request.getParameter("origen");
             double cantidad = Double.parseDouble(request.getParameter("cantidad"));
@@ -75,9 +76,12 @@
             }
         %>
 
-        <p><%=mensaje.toString()%></p>
-        <a href="cambiarDivisas.jsp">Probar de nuevo</a>
-        <a href="<%=request.getContextPath()%>">Inicio</a>
+        <div class="contenedor">
+            <p><%=mensaje%></p>
+            <a href="<%=request.getContextPath()%>/html/cambiarDivisas.html">Probar de nuevo</a>
+            <a href="<%=request.getContextPath()%>" >Inicio</a>
+
+        </div>
 
     </body>
 </html>

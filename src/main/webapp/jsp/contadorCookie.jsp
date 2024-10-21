@@ -13,8 +13,9 @@
     <body>
         <h1>Contador Cookies</h1>
         <%!
-            public void borrarCookie(Cookie cookie) {
+            public void borrarCookie(Cookie cookie, Cookie contador) {
                 cookie.setMaxAge(0);
+                contador.setMaxAge(0);
             }
         %>
         <%
@@ -43,39 +44,22 @@
                 }
             }
 
-            // PRHEBA
             if (existeContador) {
                 contador = Integer.parseInt(URLDecoder.decode(contadorCookie.getValue(), "UTF-8"));
-                contador++; // Incrementar el contador aquí
-                contadorCookie.setValue(URLEncoder.encode(String.valueOf(contador), "UTF-8")); // Luego actualizar el valor de la cookie
-                response.addCookie(contadorCookie); // Añadir la cookie actualizada
-            } else {
-                contador = 1; // Primera vez
-                contadorCookie = new Cookie("contador", URLEncoder.encode(String.valueOf(contador), "UTF-8"));
-                contadorCookie.setMaxAge(3600); // Establecer tiempo de expiración
-                response.addCookie(contadorCookie); // Agregar la nueva cookie
-            }
-
-            //FIN PRUEBA
-            /*
-            StringBuilder persona = new StringBuilder();
-            if (existeContador) {
                 contador++;
                 contadorCookie.setValue(URLEncoder.encode(String.valueOf(contador), "UTF-8"));
                 response.addCookie(contadorCookie);
-                contador = Integer.parseInt(URLDecoder.decode(contadorCookie.getValue(), "UTF-8"));
             } else {
                 contador = 1;
                 contadorCookie = new Cookie("contador", URLEncoder.encode(String.valueOf(contador), "UTF-8"));
-                response.addCookie(contadorCookie);
                 contadorCookie.setMaxAge(3600);
+                response.addCookie(contadorCookie);
             }
-             */
+
             if (!existe) {
                 cookie = new Cookie("nombreConCookie", URLEncoder.encode("María De La Cruz", "UTF-8"));
                 cookie.setMaxAge(3600);
                 response.addCookie(cookie);
-                //persona.append("Esta es la primera vez que entras.");
             }
 
         %>
@@ -84,7 +68,7 @@
 
                 <% if (contador > 1) {
                 %>
-                <p>Hola, esta es <%= contadorCookie.getValue()%> vez que entras.</p>
+                <p>Hola, has entrado un total de: <%= contadorCookie.getValue()%> veces</p>
                 <%
                 } else {
                 %>
@@ -100,7 +84,7 @@
                 %>
 
                 <input type="submit" name="recargar" value="Recargar">
-                <button name="button" type="button"  onclick="borrarCookie()">Eliminar</button>
+                <button name="button" type="button" onclick="borrarCookie(cookie,contadorCookie)">Eliminar</button>
 
                 <!-- ELIMINAS LA COOKIE IGUALANDO MAXAGE = 0 Y VUELVES AL INICIO -->
                 <button type="button" onclick="location.href = '<%=request.getContextPath()%>'">Men&uacute; Inicio</button>

@@ -8,18 +8,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/monedero.css"/>
+        <link rel="stylesheet" href="../css/adivinarNumero.css"/>
     </head>
     <body>
         <h1>Monedero</h1>
-        <form action="../jsp/monedero.jsp" method="post">
-            <label for="cantidad">Cantidad</label>  
-            <input type="text" id="cantidad" name="cantidad" required>
+        <div class="contenedor">
+            <form action="../jsp/monedero.jsp" method="post">
+                <label for="cantidad">Cantidad</label>  
+                <input type="text" id="cantidad" name="cantidad" required>
 
-            <label for="precio">Precio</label>  
-            <input type="text" id="precio" name="precio" required>
+                <label for="precio">Precio</label>  
+                <input type="text" id="precio" name="precio" required>
 
-            <input type="submit" name="enviar" class="enviar">
-        </form>
+                <input type="submit" name="enviar" class="enviar">
+            </form>
+        </div>
     </body>
 </html>

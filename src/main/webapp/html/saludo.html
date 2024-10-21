@@ -8,19 +8,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../css/saludo.css"/>
     </head>
     <body>
         <h1>Saludar</h1>
-        <form action="../jsp/saludo.jsp" method="post">
-            <label for="nombre">Nombre:</label>
-            <input type="text" name="nombre"><br>
-            <label for="genero">Sexo</label>
-            <br>
-            <input type="radio" name="genero" value="mujer"> Mujer           
-            <input type="radio" name="genero" value="hombre"> Hombre
-            <input type="radio" name="genero" value="otro"> Otro
-            <input type="submit" name="enviar" value="enviar">
-
-        </form>
+        <div class="contenedor">
+            <form action="../jsp/saludo.jsp" method="post">
+                <label for="nombre">Nombre:</label>
+                <input type="text" name="nombre"><br>
+                <label for="genero">Sexo</label>
+                <br>
+                <input type="radio" name="genero" value="mujer"> Mujer           
+                <input type="radio" name="genero" value="hombre"> Hombre
+                <input type="radio" name="genero" value="otro"> Otro
+                <input type="submit" name="enviar" value="enviar">
+            </form>
+        </div>
     </body>
 </html>

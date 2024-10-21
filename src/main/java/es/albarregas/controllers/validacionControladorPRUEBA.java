@@ -146,7 +146,6 @@ public class validacionControladorPRUEBA extends HttpServlet {
 
             if (vacio == true) {
                 out.println("<h1> No puedes mandar el formulario vacio</h1>");
-                out.println("<a href='.'>'VOLVER'</a>");
                 // break;
             } else {
 
