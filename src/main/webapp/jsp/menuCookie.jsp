@@ -4,11 +4,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link  href="<%=request.getContextPath()%>/css/monedero.css"/>    </head>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/adivinarNumero.css">
+    </head>
     <body>
         <!-- EESTA ES VISTA QUE VA A MOSTRAR LOS MENSAJES Y RECOGER LOS PARÁMETROS -->
         <h1>VISTA</h1>
-        
+        <div class="contenedor">
         <form action="../jsp/controlCookie.jsp">
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre"><br>
@@ -22,6 +23,7 @@
             <button type="button" onclick="location.href = '<%=request.getContextPath()%>'">Men&uacute; Inicio</button>
         </form>
         <!-- meter un operador ternario que evalue si esta vacio mensaje si lo esta, que no imprima nada sino impime mendaje -->
-        <p><%= request.getParameter("mensaje")%></p>        
+        <p><%= request.getParameter("mensaje")%></p> 
+        </div>
     </body>
 </html>
