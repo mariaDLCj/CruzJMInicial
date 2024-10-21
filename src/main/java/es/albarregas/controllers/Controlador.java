@@ -55,9 +55,11 @@ public class Controlador extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet Controlador</title>");
-            out.println("</head>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/cabeceraPeticion.css\"/>");
             out.println("<body>");
             out.println("<h1>Accediendo al Controlador</h1>");
+            out.println("<div class=\"contenedor\">");
+
             // se usa . porq el welcome file es el inicial en la web.xml
             //VISUALIZAR CONTINIDO PARAM 1 OPCION 2
             //Prueba
@@ -71,6 +73,7 @@ public class Controlador extends HttpServlet {
                 }
             }
             out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
+            out.println("</div>");
 
             out.println("</body>");
             out.println("</html>");

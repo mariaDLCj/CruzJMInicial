@@ -8,48 +8,51 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>Formulario completo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/comprobarEdad.css">
 
     </head>
     <body>
         <h1>Formulario de Datos</h1>
+        <div class="contenedor">
 
-        <form action="../DatosMap" method="post">
-            <label>Nombre:</label>
-            <input type="text" name="nombre"><br>
-            <label>Apellidos</label>
-            <input type="text" name="apellidos"><br>
-            <label>Fecha Nacimiento</label>
-            <input type="date" name="fecha_Nacimiento"><br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <label>Preferencias(Elija varias)</label>
+            <form action="../DatosMap" method="post">
+                <label>Nombre:</label>
+                <input type="text" name="nombre"><br>
+                <label>Apellidos</label>
+                <input type="text" name="apellidos"><br>
+                <label>Fecha Nacimiento</label>
+                <input type="date" name="fecha_Nacimiento"><br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <label>Preferencias(Elija varias)</label>
 
-            <input name="preferencias" type="checkbox">Cine<br>
-            <input name="preferencias" type="checkbox">Teatro<br>
-            <input name="preferencias" type="checkbox">m&uacute;sica<br>
-            <input name="preferencias" type="checkbox">Video juegos<br>
+                <input name="preferencias" type="checkbox">Cine<br>
+                <input name="preferencias" type="checkbox">Teatro<br>
+                <input name="preferencias" type="checkbox">m&uacute;sica<br>
+                <input name="preferencias" type="checkbox">Video juegos<br>
 
-            <br> 
-            <label>Sistemas Operativos (Elija uno)</label>
-            <select name="sistemas_Operativos">
-                <option value="ubuntu">Ubuntu</option>
-                <option value="windows">Windows</option>
-                <option value="mac">Mac</option>
-                <option value="debian">Debian</option>
-            </select>
-            <br><br>
-            <label>Sexo</label>
-            <br>
-            <input type="radio" name="genero" value="mujer"> Mujer           
-            <input type="radio" name="genero" value="hombre"> Hombre
-            <input type="radio" name="genero" value="otro"> Otro
+                <br> 
+                <label>Sistemas Operativos (Elija uno)</label>
+                <select name="sistemas_Operativos">
+                    <option value="ubuntu">Ubuntu</option>
+                    <option value="windows">Windows</option>
+                    <option value="mac">Mac</option>
+                    <option value="debian">Debian</option>
+                </select>
+                <br><br>
+                <label>Sexo</label>
+                <br>
+                <input type="radio" name="genero" value="mujer"> Mujer           
+                <input type="radio" name="genero" value="hombre"> Hombre
+                <input type="radio" name="genero" value="otro"> Otro
 
-            <input type="submit" name="enviar">
+                <input type="submit" name="enviar">
 
-        </form>
-    </body>
-</html>
+            </form>
+            </div>
+
+                </body>
+                </html>
 

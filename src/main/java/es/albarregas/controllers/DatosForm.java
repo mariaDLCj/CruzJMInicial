@@ -71,10 +71,12 @@ public class DatosForm extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet DatosForm</title>");
-            //    out.println("<link rel=\"stylesheet\" href=\"../../css/style.css\"/>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/cabeceraPeticion.css\"/>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Formulario de Datos</h1>");
+            out.println("<div class=\"contenedor\">");
+
             Enumeration<String> parametros = request.getParameterNames();
             if (parametros.hasMoreElements()) {
                 while (parametros.hasMoreElements()) {
@@ -87,9 +89,9 @@ public class DatosForm extends HttpServlet {
                         if (preferencias != null) {
                             if (preferencias.length == 1) { // o si la longitud es == a 1 entonces solo mostrar la posi 0
                                 out.println("<p>El valor de " + nuevoNombre + " es " + preferencias[0] + "</p>");
-                            } else { 
+                            } else {
                                 out.println("<p>Esto es " + nuevoNombre + "</p>");
-                                 out.println("<ul>");
+                                out.println("<ul>");
                                 for (String p : preferencias) {
                                     if (!p.isEmpty() && !p.equals("")) { //si el valor no esta vacio que la imprima (!p.equals("")) 
                                         // imprimir e un alista desordenada
@@ -122,6 +124,8 @@ public class DatosForm extends HttpServlet {
 
             }
             out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
+            out.println("</div>");
+
             out.println("</body>");
             out.println("</html>");
         }

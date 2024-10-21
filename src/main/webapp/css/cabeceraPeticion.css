@@ -37,6 +37,17 @@ div.contenedor {
     border-radius: 2%;
     margin-bottom:100px;
 }
+
+form {
+    background-color: white;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 50%;
+    text-align: left;
+    border-radius: 2%;
+    margin-bottom:100px;
+}
+
 div p:hover{
     color: darkblue;
 }
@@ -58,3 +69,36 @@ a:hover {
     background-color: white;
     color: darkblue;
 }
+
+
+a {
+    margin:40px 0px;
+    padding: 8px;
+    text-align: center;
+    background-color: #557BE6;
+    color: white;
+    text-decoration: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 2%;
+}
+
+
+
+button:hover{
+    background-color: white;
+    color: darkblue;
+}
+
+button{
+    margin:10px 0px;
+    padding: 8px;
+    text-align: center;
+    background-color: #557BE6;
+    color: white;
+    text-decoration: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 2%;
+}
+

@@ -53,9 +53,12 @@ public class DirectoControlador extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet DirectoControlador</title>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/cabeceraPeticion.css\"/>");
+
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet DirectoControlador at " + request.getContextPath() + "</h1>");
+            out.println("<div class=\"contenedor\">");
 
             Map<String, String[]> parametros = request.getParameterMap();
 
@@ -81,6 +84,7 @@ public class DirectoControlador extends HttpServlet {
             } else {
                 doPost(request, response); // te redirige al doget
             }
+            out.println("</div>");
 
             out.println("</body>");
             out.println("</html>");

@@ -123,9 +123,12 @@ public class validacionControladorPRUEBA extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Esto es el do POST</title>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/cabeceraPeticion.css\"/>");
+
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Formulario de Validado</h1>");
+            out.println("<div class=\"contenedor\">");
 
             Map<String, String[]> parametros = request.getParameterMap();
 
@@ -186,6 +189,7 @@ public class validacionControladorPRUEBA extends HttpServlet {
             } // fin else
 
             out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
+            out.println("</div>");
             out.println("</body>");
             out.println("</html>");
 

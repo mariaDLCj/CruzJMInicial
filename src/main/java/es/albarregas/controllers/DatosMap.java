@@ -40,6 +40,8 @@ public class DatosMap extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet DatosMap</title>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/cabeceraPeticion.css\"/>");
+
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet DatosMap at " + request.getContextPath() + "</h1>");
@@ -97,6 +99,7 @@ public class DatosMap extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Formulario de Datos</h1>");
+            out.println("<div class=\"contenedor\">");
 
             Map<String, String[]> parametros = request.getParameterMap();
 
@@ -137,6 +140,8 @@ public class DatosMap extends HttpServlet {
             //ITERAR SOBRE EL MAP
             // INICIO TEXTO ADAPTAR
             out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
+            out.println("</div>");
+
             out.println("</body>");
             out.println("</html>");
         }

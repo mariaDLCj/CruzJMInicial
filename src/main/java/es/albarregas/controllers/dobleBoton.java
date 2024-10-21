@@ -68,9 +68,13 @@ public class dobleBoton extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet dobleBoton</title>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/cabeceraPeticion.css\"/>");
+
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Formulario de Doble Botón</h1>");
+            out.println("<div class=\"contenedor\">");
+
             /*
             OBTENEMOS EL VALOR DEL BOTÓN, QUE SI ES ENUM NOS TRAERÁ
             LOS DATOS MEDIANTE EL ENUMERATION Y EN CASO CONTRARIO 
@@ -158,7 +162,10 @@ public class dobleBoton extends HttpServlet {
                 }
                 /*FIN DEL MAP*/
             }
+
             out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
+            out.println("</div>");
+
             out.println("</body>");
             out.println("</html>");
         }

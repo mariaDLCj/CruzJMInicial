@@ -102,9 +102,11 @@ public class RecordarDatos extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet RecordarDatos</title>");
+            out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/cabeceraPeticion.css\"/>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Formulario que Recuerda Datos</h1>");
+            out.println("<div class=\"contenedor\">");
 
             /* INTENTO CON ENUMERATION  */
             //PODRÍA SER QUE TUVIERAS QUE LIMPIAR PARAMETROS SI USAS EL ENUMERATION AQUI ARRIBA DE TODO
@@ -175,6 +177,8 @@ public class RecordarDatos extends HttpServlet {
                 }// fin if de parametroshasmore
             }// fin del if else inicial
             out.println("<a href='" + request.getContextPath() + "'>Inicio</a>");
+            out.println("</div>");
+
             out.println("</body>");
             out.println("</html>");
         }//fin try
